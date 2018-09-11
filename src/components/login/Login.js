@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DataManager from '.././DataManager'
+import DataManager from '../modules/DataManager'
 
 export default class Login extends Component {
   state = {
