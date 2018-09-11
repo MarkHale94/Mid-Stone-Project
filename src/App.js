@@ -10,12 +10,13 @@ class App extends Component {
       <React.Fragment>
       {
           !this.isAuthenticated() &&
-          <Route exact path="/login" render={(props) => {
+          <Route exact path="/" render={(props) => {
               return <Login {...props} />
           }} />
       }
       {
-          <UserPage isAuthenticated={this.isAuthenticated}/>
+        this.isAuthenticated() &&
+        <UserPage/>
       }
   </React.Fragment>
     );
