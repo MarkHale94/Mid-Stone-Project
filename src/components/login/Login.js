@@ -14,8 +14,8 @@ registerUser= () =>{
     password:this.state.password
   }
   DataManager.add("users", newUser)
-  .then(sessionStorage.setItem("user", JSON.stringify(newUser)))
-  .then(window.location.reload());
+  .then((userinfo)=>sessionStorage.setItem("user", JSON.stringify(userinfo)))
+  .then(()=>window.location.reload())
 }
 
 
