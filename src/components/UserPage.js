@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DataManager from './modules/DataManager'
 import GameCardDisplay from './games/GameCardDisplay'
+import { Card} from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css';
 
 export default class UserPage extends Component {
   state = {
@@ -35,8 +37,10 @@ export default class UserPage extends Component {
             <input type="text" placeholder="Search" id="userSearch" defaultValue={this.state.userSearch} onChange={this.handleFieldChange}/>
             <button onClick={this.searchForGames}>Search</button>
           </div>
+        <Card.Group>
           {this.state.gamesList.map(game =>
         <GameCardDisplay game={game} key={game.id}/>)}
+        </Card.Group>
         </div>
       );
     }
