@@ -11,7 +11,7 @@ export default class UserPage extends Component {
     userSearch:""
   }
 
-  handleFieldChange = (evt) => {
+  handleFieldChange = (evt) =>{
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
     this.setState(stateToChange)
@@ -27,9 +27,11 @@ export default class UserPage extends Component {
   }
 
   addNewGameToCollection = (string, game)=>{
+    let localUser = JSON.parse(sessionStorage.getItem("user"))
     DataManager.add(string, game)
-    }
-
+    .then(() =>DataManager.getUsersCollection("gameCollection", localUser.id))
+    .then(games => {this.setState({gameCollection: games})})
+  }
 
     render() {
       return (

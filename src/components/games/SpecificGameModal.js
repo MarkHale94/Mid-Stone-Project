@@ -18,8 +18,26 @@ export default class SpecificGameModal extends Component{
       similarGamesNames: null,
       userId:JSON.parse(sessionStorage.user).id
     }
+    this.addNewGame = this.addNewGame.bind(this);
   }
-
+  
+  addNewGame(evt){
+    evt.preventDefault()
+    let newGameToAdd={
+      giantBombGameid: this.state.giantBombGameid,
+      image: this.state.image,
+      title: this.state.title,
+      description: this.state.description,
+      genreName: this.state.genreName,
+      genreId: this.state.genreId,
+      platform: this.state.platform,
+      rating: this.state.rating,
+      similarGamesNames: this.state.similarGamesNames,
+      userId: this.state.userId
+    }
+    this.props.addGame("gameCollection", newGameToAdd)
+    console.log("check database to see if it Worked", newGameToAdd)
+  }
 searchForSpecificGame = ()=>{
 DataManager.specificGameSearch(this.props.game.api_detail_url)
   .then((game) => {
@@ -81,6 +99,7 @@ DataManager.specificGameSearch(this.props.game.api_detail_url)
   })
 }
 
+
 render(){
     return(
           <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}>
@@ -104,7 +123,7 @@ render(){
         <p>
           Platform(s):{this.state.platform}
         </p>
-        <Button onClick={this.props.addGame("gameCollection", this.state)}>Add {this.state.title} to Your Collection?</Button>
+        <Button onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
       </Modal.Description>
     </Modal.Content>
   </Modal>
