@@ -6,7 +6,8 @@ import 'semantic-ui-css/semantic.min.css';
 
 export default class UserPage extends Component {
   state = {
-    gamesList:[],
+    gameCollection:[],
+    gamesListSearch:[],
     userSearch:""
   }
 
@@ -20,10 +21,14 @@ export default class UserPage extends Component {
     DataManager.search(this.state.userSearch).then((r)=>{
       for(let i=0;i<r.results.length;i++){
         newGamesArray.push(r.results[i])
-        this.setState({gamesList : newGamesArray})
+        this.setState({gamesListSearch : newGamesArray})
       }
     })
   }
+
+  addNewGameToCollection = (string, game)=>{
+    DataManager.add(string, game)
+    }
 
 
     render() {
@@ -38,8 +43,8 @@ export default class UserPage extends Component {
             <button onClick={this.searchForGames}>Search</button>
           </div>
         <Card.Group>
-          {this.state.gamesList.map(game =>
-        <GameCardDisplay game={game} key={game.id}/>)}
+          {this.state.gamesListSearch.map(game =>
+        <GameCardDisplay addGame={this.addNewGameToCollection} game={game} key={game.id}/>)}
         </Card.Group>
         </div>
       );

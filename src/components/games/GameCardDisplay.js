@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, Image,} from 'semantic-ui-react'
-// import DataManager from '../modules/DataManager'
 import SpecificGameModal from './SpecificGameModal'
 export default class GameCardDisplay extends Component {
     render(){
@@ -12,7 +11,7 @@ export default class GameCardDisplay extends Component {
                 <Card.Description>
                     game description: {this.props.game.deck}
                 </Card.Description>
-                <SpecificGameModal game={this.props.game}/>
+                <SpecificGameModal addGame={this.props.addGame} game={this.props.game}/>
                 </Card.Content>
             </Card>
         )
