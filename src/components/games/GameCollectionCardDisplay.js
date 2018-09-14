@@ -4,6 +4,7 @@ export default class GameCollectionCardDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
+        edit:false,
         isChecked:false,
         hoursPlayed: null,
         review: null,
@@ -42,6 +43,9 @@ export default class GameCollectionCardDisplay extends Component {
             review: this.state.review
         }
         this.props.editGame(("gameCollection", this.props.game.id),newEdit)
+        if(this.state.edit===true){
+            this.setState({edit:false})
+        }
     }
 
     handleFieldChange = (evt) =>{
@@ -69,22 +73,42 @@ export default class GameCollectionCardDisplay extends Component {
                                 <input type="number" min="0" placeholder="Hours Played?" id="hoursPlayed" onChange={this.handleFieldChange}/>
                                 <br/>
                             </div>}
-                        {this.props.game.hoursPlayed!==null &&
+                            {this.state.edit===false &&
                             <div>
-                                <input type="number" min="0" defaultValue={this.props.game.hoursPlayed} id="hoursPlayed" onChange={this.handleFieldChange}/>
+                                <p>{this.props.game.hoursPlayed}</p>
                                 <br/>
                             </div>}
+                        {this.state.edit===true &&
+                           <div>
+                            <input type="number" min="0" defaultValue={this.props.game.hoursPlayed} id="hoursPlayed" onChange={this.handleFieldChange}/>
+                            <br/>
+                           </div>
+                        }
                     {this.props.game.review===null &&
                     <div>
                     <textarea placeholder="Please leave a review of the game" onChange={this.handleFieldChange} id="review"></textarea>
                     <br/>
+                    <Button onClick={this.saveTimeandReview}>Save</Button><Button onClick={this.onCheckBoxClick} id="review">Cancel</Button>
                     </div>}
                     {this.props.game.review!==null &&
                     <div>
-                    <textarea defaultValue={this.props.game.review} onChange={this.handleFieldChange} id="review"></textarea>
-                    <br/>
+                    { this.state.edit===true &&
+                        <div>
+                            <textarea defaultValue={this.props.game.review} onChange={this.handleFieldChange} id="review"></textarea>
+                            <br/>
+                            <Button onClick={this.saveTimeandReview}>Save Edit</Button><Button onClick={()=>this.setState({edit:false})}>Cancel Edit</Button>
+                            <br />
+                        </div>
+                    }
+                        {this.state.edit===false &&
+                        <div>
+                            <p>{this.props.game.review}</p>
+                            <br/>
+                            <Button onClick={()=>this.setState({edit:true})}>Edit</Button>
+                            <br />
+                            <br />
+                        </div>}
                     </div>}
-                    <Button onClick={this.saveTimeandReview}>Save</Button><Button onClick={this.onCheckBoxClick} id="review">Cancel</Button>
                     <br/>
                     <br/>
                     </div>
