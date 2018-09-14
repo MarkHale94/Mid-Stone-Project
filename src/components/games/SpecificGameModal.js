@@ -20,7 +20,7 @@ export default class SpecificGameModal extends Component{
     }
     this.addNewGame = this.addNewGame.bind(this);
   }
-  
+
   addNewGame(evt){
     evt.preventDefault()
     let newGameToAdd={
@@ -36,8 +36,8 @@ export default class SpecificGameModal extends Component{
       userId: this.state.userId
     }
     this.props.addGame("gameCollection", newGameToAdd)
-    console.log("check database to see if it Worked", newGameToAdd)
   }
+
 searchForSpecificGame = ()=>{
 DataManager.specificGameSearch(this.props.game.api_detail_url)
   .then((game) => {
@@ -99,10 +99,9 @@ DataManager.specificGameSearch(this.props.game.api_detail_url)
   })
 }
 
-
 render(){
     return(
-          <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}>
+      <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}>
     <Modal.Content image>
       <Image
         wrapped
@@ -123,7 +122,9 @@ render(){
         <p>
           Platform(s):{this.state.platform}
         </p>
-        <Button onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
+        <Modal.Actions>
+          <Button onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
+        </Modal.Actions>
       </Modal.Description>
     </Modal.Content>
   </Modal>
