@@ -14,6 +14,13 @@ export default Object.create(null, {
                 .then(result => result.json())
                 }
         },
+        remove: {
+            value: (key, id) => {
+                return fetch(`${remoteURL}/${key}/${id}`, {
+                    method: "DELETE"
+                }).then(result => result.json())
+            }
+        },
         getUsersCollection: {
             value: (key, userId) => {
                 return fetch(`${remoteURL}/${key}/?userId=${userId}`)

@@ -10,26 +10,6 @@ export default class UserPage extends Component {
     gameCollection:[],
     gamesListSearch:[],
     userSearch:"",
-    showSearch:true,
-    showCollection:false
-  }
-  showSearch = (e) => {
-    e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
-    e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
-    e.target.parentElement.parentElement.classList.add("is-active")
-    this.setState({
-        showSearch: true,
-        showCollection: false
-    })
-  }
-  showCollection = (e) => {
-    e.target.parentElement.parentElement.parentElement.children[1].classList.remove("is-active")
-    e.target.parentElement.parentElement.parentElement.children[2].classList.remove("is-active")
-    e.target.parentElement.parentElement.classList.add("is-active")
-    this.setState({
-        showSearch: false,
-        showCollection: true
-    })
   }
 
   handleFieldChange = (evt) =>{
@@ -53,6 +33,14 @@ export default class UserPage extends Component {
     .then(() =>DataManager.getUsersCollection("gameCollection", localUser.id))
     .then(games => {this.setState({gameCollection: games})})
   }
+
+  deleteGameFromCollection = (string, gameId) => {
+    let localUser = JSON.parse(sessionStorage.getItem("user"))
+    DataManager.remove(string, gameId)
+    .then(() => DataManager.getUsersCollection("gameCollection", localUser.id))
+    .then(games => {this.setState({gameCollection: games})})
+}
+
   componentDidMount(){
     let localUser = JSON.parse(sessionStorage.getItem("user"))
     DataManager.getUsersCollection("gameCollection", localUser.id)
@@ -61,15 +49,19 @@ export default class UserPage extends Component {
 
     render() {
       const panes = [
-        { menuItem: 'Tab 1', render: () => <Tab.Pane><GameCollectionList game={this.state.gameCollection}/></Tab.Pane> },
-        { menuItem: 'Tab 2', render: () => <Tab.Pane><div className="search-input">
+        { menuItem: 'Search', render: () => <Tab.Pane>
+          <div className="search-input">
         <input type="text" placeholder="Search" id="userSearch" defaultValue={this.state.userSearch} onChange={this.handleFieldChange}/>
         <button onClick={this.searchForGames}>Search</button>
     <Card.Group>
       {this.state.gamesListSearch.map(game =>
     <GameCardDisplay addGame={this.addNewGameToCollection} game={game} key={game.id}/>)}
     </Card.Group>
-      </div></Tab.Pane> },
+        <br/>
+      </div>
+
+      </Tab.Pane> },
+        { menuItem: 'Game Collection', render: () => <Tab.Pane><GameCollectionList  deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
       ]
       return (
         <div>
@@ -79,11 +71,6 @@ export default class UserPage extends Component {
           <div>Your ID number is {JSON.parse(sessionStorage.getItem("user")).id}</div>
           <div>
           <Tab panes={panes}/>
-          
-             {/* this.state.showSearch === true && */}
-          
-             {/* this.state.showCollection === true && */}
-          
         </div>
       </div>
       );
