@@ -1,10 +1,55 @@
 import React, { Component } from 'react';
-import { Card, Image, Button } from 'semantic-ui-react'
+import { Card, Image, Button, Checkbox, } from 'semantic-ui-react'
 export default class GameCollectionCardDisplay extends Component {
-    deleteThisGame = ()=>{this.props.deleteGame("gameCollection", this.props.game.id)}
+    constructor(props) {
+        super(props);
+        this.state = {
+        isChecked:false,
+        hoursPlayed: null,
+        review: null,
+        }
+        // this.onCheckBoxClick = this.onCheckBoxClick.bind(this);
+      }
     componentDidMount(){
-        console.log(this.props.game)
+        if(this.props.game.hoursPlayed!==null){
+            this.setState({isChecked : true})
+        } else if(this.props.game.hoursPlayed===null){
+            this.setState({isChecked : false})
+        }
     }
+    onCheckBoxClick=()=>{
+        if(this.state.isChecked===false){
+            this.setState({isChecked : true})
+        } else if(this.state.isChecked===true){
+            this.setState({isChecked : false})
+        }
+    }
+    deleteThisGame = ()=>{this.props.deleteGame("gameCollection", this.props.game.id)}
+    
+    saveTimeandReview = ()=>{
+        let newEdit={
+            giantBombGameid: this.props.game.giantBombGameid,
+            image: this.props.game.image,
+            title: this.props.game.title,
+            description: this.props.game.description,
+            genreName: this.props.game.genreName,
+            genreId: this.props.game.genreId,
+            platform: this.props.game.platform,
+            rating: this.props.game.rating,
+            similarGamesNames: this.props.game.similarGamesNames,
+            userId: this.props.game.userId,
+            hoursPlayed: this.state.hoursPlayed,
+            review: this.state.review
+        }
+        this.props.editGame(("gameCollection", this.props.game.id),newEdit)
+    }
+
+    handleFieldChange = (evt) =>{
+        const stateToChange = {}
+        stateToChange[evt.target.id] = evt.target.value
+        this.setState(stateToChange)
+    }
+
     render(){
         return(
             <Card>
@@ -16,6 +61,34 @@ export default class GameCollectionCardDisplay extends Component {
                 <p>Genre(s):{this.props.game.genreName}</p>
                 <p>Platform(s):{this.props.game.platform}</p>
                 <p>Game description: {this.props.game.description}</p>
+                <Checkbox label='Have you beaten this game?' checked={this.state.isChecked} onClick={this.onCheckBoxClick} />
+                {this.state.isChecked &&
+                    <div>
+                        {this.props.game.hoursPlayed===null &&
+                            <div>
+                                <input type="number" min="0" placeholder="Hours Played?" id="hoursPlayed" onChange={this.handleFieldChange}/>
+                                <br/>
+                            </div>}
+                        {this.props.game.hoursPlayed!==null &&
+                            <div>
+                                <input type="number" min="0" defaultValue={this.props.game.hoursPlayed} id="hoursPlayed" onChange={this.handleFieldChange}/>
+                                <br/>
+                            </div>}
+                    {this.props.game.review===null &&
+                    <div>
+                    <textarea placeholder="Please leave a review of the game" onChange={this.handleFieldChange} id="review"></textarea>
+                    <br/>
+                    </div>}
+                    {this.props.game.review!==null &&
+                    <div>
+                    <textarea defaultValue={this.props.game.review} onChange={this.handleFieldChange} id="review"></textarea>
+                    <br/>
+                    </div>}
+                    <Button onClick={this.saveTimeandReview}>Save</Button><Button onClick={this.onCheckBoxClick} id="review">Cancel</Button>
+                    <br/>
+                    <br/>
+                    </div>
+                }
                 <Button onClick={this.deleteThisGame}>Delete from Your Collection</Button>
                 </Card.Description>
                 </Card.Content>

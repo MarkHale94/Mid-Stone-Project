@@ -21,6 +21,18 @@ export default Object.create(null, {
                 }).then(result => result.json())
             }
         },
+        edit: {
+            value: (key, id, object) => {
+                return fetch(`${remoteURL}/${key}/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(object)
+                })
+                .then(result => result.json())
+            }
+        },
         getUsersCollection: {
             value: (key, userId) => {
                 return fetch(`${remoteURL}/${key}/?userId=${userId}`)

@@ -7,7 +7,7 @@ export default class GameCollectionList extends Component {
         return (
             <Card.Group>
                 {this.props.game.map(game =>
-            <GameCollectionCardDisplay deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
+            <GameCollectionCardDisplay editGame={this.props.editGame} deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
             </Card.Group>
         )
     }

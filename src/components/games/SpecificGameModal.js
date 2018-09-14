@@ -16,6 +16,8 @@ export default class SpecificGameModal extends Component{
       platform: null,
       rating: null,
       similarGamesNames: null,
+      hoursPlayed: null,
+      review: null,
       userId:JSON.parse(sessionStorage.user).id
     }
     this.addNewGame = this.addNewGame.bind(this);
@@ -33,7 +35,9 @@ export default class SpecificGameModal extends Component{
       platform: this.state.platform,
       rating: this.state.rating,
       similarGamesNames: this.state.similarGamesNames,
-      userId: this.state.userId
+      userId: this.state.userId,
+      hoursPlayed: null,
+      review: null,
     }
     this.props.addGame("gameCollection", newGameToAdd)
   }

@@ -40,6 +40,12 @@ export default class UserPage extends Component {
     .then(() => DataManager.getUsersCollection("gameCollection", localUser.id))
     .then(games => {this.setState({gameCollection: games})})
 }
+  editGameInfo = (id, object) =>{
+    let localUser = JSON.parse(sessionStorage.getItem("user"));
+    DataManager.edit("gameCollection", id, object)
+    .then(() => DataManager.getUsersCollection("gameCollection", localUser.id))
+    .then(games => {this.setState({gameCollection: games})})
+  }
 
   componentDidMount(){
     let localUser = JSON.parse(sessionStorage.getItem("user"))
@@ -61,7 +67,7 @@ export default class UserPage extends Component {
       </div>
 
       </Tab.Pane> },
-        { menuItem: 'Game Collection', render: () => <Tab.Pane><GameCollectionList  deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
+        { menuItem: 'Game Collection', render: () => <Tab.Pane><GameCollectionList  editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
       ]
       return (
         <div>
