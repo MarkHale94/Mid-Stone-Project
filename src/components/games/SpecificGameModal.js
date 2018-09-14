@@ -7,6 +7,7 @@ export default class SpecificGameModal extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      modalOpen: false,
       giantBombGameid: null,
       image: null,
       title: null,
@@ -22,6 +23,9 @@ export default class SpecificGameModal extends Component{
     }
     this.addNewGame = this.addNewGame.bind(this);
   }
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   addNewGame(evt){
     evt.preventDefault()
@@ -40,6 +44,7 @@ export default class SpecificGameModal extends Component{
       review: null,
     }
     this.props.addGame("gameCollection", newGameToAdd)
+    this.handleClose()
   }
 
 searchForSpecificGame = ()=>{
@@ -101,11 +106,14 @@ DataManager.specificGameSearch(this.props.game.api_detail_url)
       }
       this.setState(newState)
   })
+  .then(this.handleOpen())
 }
 
 render(){
     return(
-      <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}>
+      <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}
+      open={this.state.modalOpen}
+      onClose={this.handleClose}>
     <Modal.Content image>
       <Image
         wrapped
