@@ -56,9 +56,15 @@ DataManager.specificGameSearch(this.props.game.api_detail_url)
     newState.title=game.results.name
     newState.description=game.results.deck
     if(game.results.original_game_rating===null)
-      {newState.rating= "No Available ESRB Rating"
-      }else if (game.results.original_game_rating[0].name!==null){
-        newState.rating=game.results.original_game_rating[0].name
+      {newState.rating= "No Available Ratings"
+      }else if (game.results.original_game_rating!==null){
+        for(let i=0;i<game.results.original_game_rating.length;i++){
+          if(i===0){
+            newState.rating=(game.results.original_game_rating[i].name)
+          }else if (i!==0){
+          newState.rating+=", "+(game.results.original_game_rating[i].name)
+          }
+        }
         }
     if(game.results.genres===null)
         {newState.genreId= "No Available Genre"
@@ -126,7 +132,7 @@ render(){
           {this.state.description}
         </p>
         <p>
-          {this.state.rating}
+    Rating(s):{this.state.rating}
         </p>
         <p>
           Genre(s):{this.state.genreName}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DataManager from './modules/DataManager'
 import GameCardDisplay from './games/GameCardDisplay'
-import { Card, Tab} from 'semantic-ui-react'
+import { Card, Tab } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import GameCollectionList from './games/GameCollectionList';
 
@@ -10,6 +10,7 @@ export default class UserPage extends Component {
     gameCollection:[],
     gamesListSearch:[],
     userSearch:"",
+    userCategories:[]
   }
 
   handleFieldChange = (evt) =>{
@@ -67,7 +68,8 @@ export default class UserPage extends Component {
       </div>
 
       </Tab.Pane> },
-        { menuItem: 'Game Collection', render: () => <Tab.Pane><GameCollectionList  editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
+        { menuItem: 'Game Collection', render: () => <Tab.Pane>
+          <GameCollectionList  editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
       ]
       return (
         <div>
