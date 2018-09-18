@@ -39,6 +39,12 @@ export default Object.create(null, {
                 .then(result => result.json())
                 },
             },
+        getAllUsers: {
+            value: () => {
+                return fetch(`${remoteURL}/users`)
+                .then(result => result.json())
+                },
+            },
 
         search: {
             value: (searchTerm) =>

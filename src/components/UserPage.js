@@ -12,7 +12,6 @@ export default class UserPage extends Component {
     userSearch:"",
     userCategories:[]
   }
-
   handleFieldChange = (evt) =>{
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
