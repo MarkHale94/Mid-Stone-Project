@@ -11,7 +11,7 @@ export default class GameCardDisplay extends Component {
                 <Card.Description>
                     game description: {this.props.game.deck}
                 </Card.Description>
-                <SpecificGameModal addGame={this.props.addGame} game={this.props.game}/>
+                <SpecificGameModal addGame={this.props.addGame} game={this.props.game} />
                 </Card.Content>
             </Card>
         )

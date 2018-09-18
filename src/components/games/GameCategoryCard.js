@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card} from 'semantic-ui-react';
+import { Card, Image} from 'semantic-ui-react';
 import RandomGameModal from './RandomGameModal'
 export default class GameCategoryCard extends Component {
 constructor(props) {
@@ -18,10 +18,27 @@ componentDidMount(){
 }
     render(){
         return(
-            <Card>
-                <div>{this.props.category.categoryName}</div>
-                <RandomGameModal game={this.props.games}/>
-            </Card>
+            <div>
+                <div><h3>Category:{this.props.category.categoryName}</h3></div>
+                <br />
+                <Card.Group>
+                    {this.state.gamesInCategory !==null &&
+                   
+                        this.state.gamesInCategory.map(game => 
+                    <Card key={game.id}>
+                        <Image src={(game.image)} alt={game.title}></Image>
+                        <Card.Content>
+                        <Card.Header>{game.title}</Card.Header>
+                        <Card.Description>
+                            game description: {game.description}
+                        </Card.Description>
+                        </Card.Content>
+                    </Card>
+                    )
+                    }
+                </Card.Group>
+                <RandomGameModal game={this.state.gamesInCategory}/>
+            </div>
         )
     }
 }
