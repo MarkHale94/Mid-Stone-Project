@@ -3,6 +3,7 @@ import GameCollectionCardDisplay from './GameCollectionCardDisplay'
 import { Card, Tab, Button } from 'semantic-ui-react'
 import RandomGameModal from './RandomGameModal'
 import CategoryMakerModal from './GameCategories'
+import GameCategoryCard from './GameCategoryCard'
 export default class GameCollectionList extends Component {   
     constructor(props) {
         super(props);
@@ -22,7 +23,9 @@ export default class GameCollectionList extends Component {
     categoryTabMaker=()=>{
         const panes = this.props.categories.map((category) => ({
             menuItem: category.categoryName,
-            render: () => <Tab.Pane>{category.categoryName}</Tab.Pane>
+            render: () => <Tab.Pane>
+            <GameCategoryCard games={this.props.game} category={category} key={category.id}/>
+        </Tab.Pane>
         }))
         return panes
 }

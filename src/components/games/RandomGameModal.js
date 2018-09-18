@@ -2,7 +2,7 @@
 import { Button, Header, Image, Modal} from 'semantic-ui-react';
 import React, { Component } from 'react';
 
-export default class SpecificGameModal extends Component{
+export default class RandomGameModal extends Component{
   constructor(props) {
     super(props);
     this.state = {
