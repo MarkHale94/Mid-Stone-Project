@@ -29,7 +29,7 @@ export default class GameCollectionList extends Component {
 
                 { this.props.game.length>0 &&
                 <div>
-                    <CategoryMakerModal games={this.props.game}/>
+                    <CategoryMakerModal addNewCategory={this.props.addCategory} games={this.props.game}/>
                     <br />
                     <br />
                     <RandomGameModal game={this.props.game}/>

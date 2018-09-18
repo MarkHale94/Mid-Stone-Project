@@ -10,7 +10,7 @@ export default class UserPage extends Component {
     gameCollection:[],
     gamesListSearch:[],
     userSearch:"",
-    userCategories:[]
+    userCategories:[],
   }
   handleFieldChange = (evt) =>{
     const stateToChange = {}
@@ -47,10 +47,20 @@ export default class UserPage extends Component {
     .then(games => {this.setState({gameCollection: games})})
   }
 
+  addNewGameCategory = (string, category)=>{
+    let localUser = JSON.parse(sessionStorage.getItem("user"))
+    DataManager.add(string, category)
+    .then(DataManager.getUsersCategories("userCategories", localUser.id))
+    .then(categories => {this.setState({userCategories: categories})})
+  }
+
   componentDidMount(){
     let localUser = JSON.parse(sessionStorage.getItem("user"))
     DataManager.getUsersCollection("gameCollection", localUser.id)
     .then(games => {this.setState({gameCollection: games})})
+    .then(DataManager.getUsersCategories("userCategories", localUser.id))
+    .then(categories => {this.setState({userCategories: categories})})
+    .then(this.state)
   }
 
     render() {
@@ -68,7 +78,7 @@ export default class UserPage extends Component {
 
       </Tab.Pane> },
         { menuItem: 'Game Collection', render: () => <Tab.Pane>
-          <GameCollectionList  editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
+          <GameCollectionList  addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
       ]
       return (
         <div>

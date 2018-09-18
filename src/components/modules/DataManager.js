@@ -39,6 +39,12 @@ export default Object.create(null, {
                 .then(result => result.json())
                 },
             },
+        getUsersCategories: {
+            value: (key, userId) => {
+                return fetch(`${remoteURL}/${key}/?userId=${userId}`)
+                .then(result => result.json())
+                },
+            },
         getAllUsers: {
             value: () => {
                 return fetch(`${remoteURL}/users`)

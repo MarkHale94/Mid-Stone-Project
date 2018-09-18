@@ -9,6 +9,7 @@ export default class CategoryMakerModal extends Component{
       modalOpen: false,
       categoryName: null,
       userId: JSON.parse(sessionStorage.getItem("user")).id,
+      gameId:null
     }
   }
   handleOpen = () => this.setState({ modalOpen: true })
@@ -22,7 +23,13 @@ export default class CategoryMakerModal extends Component{
 }
 
   addNewCategory=()=>{
-
+  let newCategory={
+    categoryName:this.state.categoryName,
+    userId:this.state.userId,
+    gameId:this.state.gameId
+  }
+  this.props.addNewCategory("userCategories", newCategory)
+  this.handleClose()
 }
 
 render(){
