@@ -19,7 +19,8 @@ export default class SpecificGameModal extends Component{
       similarGamesNames: null,
       hoursPlayed: null,
       review: null,
-      userId:JSON.parse(sessionStorage.user).id
+      userId:JSON.parse(sessionStorage.user).id,
+      categoryId:[]
     }
     this.addNewGame = this.addNewGame.bind(this);
   }

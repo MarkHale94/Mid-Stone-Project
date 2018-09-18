@@ -40,7 +40,8 @@ export default class GameCollectionCardDisplay extends Component {
             similarGamesNames: this.props.game.similarGamesNames,
             userId: this.props.game.userId,
             hoursPlayed: this.state.hoursPlayed,
-            review: this.state.review
+            review: this.state.review,
+            categoryId: this.props.game.categoryId
         }
         this.props.editGame(("gameCollection", this.props.game.id),newEdit)
         if(this.state.edit===true){
