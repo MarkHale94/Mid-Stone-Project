@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameCollectionCardDisplay from './GameCollectionCardDisplay'
-import { Card, Tab } from 'semantic-ui-react'
+import { Card, Tab, Button } from 'semantic-ui-react'
 import RandomGameModal from './RandomGameModal'
 import CategoryMakerModal from './GameCategories'
 export default class GameCollectionList extends Component {   
@@ -10,6 +10,15 @@ export default class GameCollectionList extends Component {
         isInCategory: false
         }
       }
+    
+    renderCategoryTabs =()=>{
+        if(this.state.isInCategory===false){
+            this.setState({isInCategory : true})
+        } else if(this.state.isInCategory===true){
+            this.setState({isInCategory : false})
+        }
+    }
+
     categoryTabMaker=()=>{
         const panes = this.props.categories.map((category) => ({
             menuItem: category.categoryName,
@@ -26,16 +35,26 @@ export default class GameCollectionList extends Component {
 
                 { this.props.game.length>0 &&
                 <div>
-                    <Tab panes={this.categoryTabMaker()}/>
-                    <CategoryMakerModal addNewCategory={this.props.addCategory} games={this.props.game}/>
-                    <br />
-                    <br />
-                    <RandomGameModal game={this.props.game}/>
-                        <Card.Group>
-                            {this.props.game.map(game =>
-                        <GameCollectionCardDisplay editGame={this.props.editGame} deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
-                        </Card.Group>
-                    </div>}
+                    {this.state.isInCategory===true &&
+                        <div>
+                        <Button onClick={this.renderCategoryTabs}>Show Collection</Button>
+                        <Tab panes={this.categoryTabMaker()}/>
+                        </div>
+                    }
+                    { this.state.isInCategory===false &&
+                    <div>
+                        <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>
+                        <CategoryMakerModal addNewCategory={this.props.addCategory} games={this.props.game}/>
+                        <br />
+                        <br />
+                        <RandomGameModal game={this.props.game}/>
+                            <Card.Group>
+                                {this.props.game.map(game =>
+                            <GameCollectionCardDisplay editGame={this.props.editGame} deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
+                            </Card.Group>
+                    </div>
+                    }
+                </div>}
             
             </div>
         )
