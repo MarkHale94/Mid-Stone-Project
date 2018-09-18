@@ -51,9 +51,10 @@ export default class GameCollectionList extends Component {
                         <br />
                         <br />
                         <RandomGameModal game={this.props.game}/>
+                        <br/>
                             <Card.Group>
                                 {this.props.game.map(game =>
-                            <GameCollectionCardDisplay editGame={this.props.editGame} deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
+                            <GameCollectionCardDisplay categories={this.props.categories} editGame={this.props.editGame} deleteGame={this.props.deleteGame} game={game} key={game.id}/>)}
                             </Card.Group>
                     </div>
                     }

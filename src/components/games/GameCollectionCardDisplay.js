@@ -8,8 +8,9 @@ export default class GameCollectionCardDisplay extends Component {
         isChecked:false,
         hoursPlayed: null,
         review: null,
+        categoriesExist:[],
+        categoryToAddTo:null
         }
-        // this.onCheckBoxClick = this.onCheckBoxClick.bind(this);
       }
     componentDidMount(){
         if(this.props.game.hoursPlayed!==null){
@@ -17,6 +18,9 @@ export default class GameCollectionCardDisplay extends Component {
         } else if(this.props.game.hoursPlayed===null){
             this.setState({isChecked : false})
         }
+        let allCategories={}
+        allCategories.categoriesExist=this.props.categories
+        this.setState(allCategories)
     }
     onCheckBoxClick=()=>{
         if(this.state.isChecked===false){
@@ -55,6 +59,7 @@ export default class GameCollectionCardDisplay extends Component {
         this.setState(stateToChange)
     }
 
+
     render(){
         return(
             <Card>
@@ -66,6 +71,22 @@ export default class GameCollectionCardDisplay extends Component {
                 <p>Genre(s):{this.props.game.genreName}</p>
                 <p>Platform(s):{this.props.game.platform}</p>
                 <p>Game description: {this.props.game.description}</p>
+                {this.state.categoriesExist.length>0 &&
+                
+                <select defaultValue="" name="category" id="categoryToAddTo"
+                onChange={this.handleFieldChange}>
+            <option value="">Select A Category to Add this Game to</option>
+        {
+            this.state.categoriesExist.map(e => <option key={e.id} id={e.id}>{e.categoryName}</option>)
+        }
+        </select>
+                }
+                { this.state.categoryToAddTo !==null &&
+                    <div>
+                        <Button>Submit To Selected Category</Button>
+                        <br />
+                    </div>
+                }
                 <Checkbox label='Have you beaten this game?' checked={this.state.isChecked} onClick={this.onCheckBoxClick} />
                 {this.state.isChecked &&
                     <div>
@@ -76,7 +97,7 @@ export default class GameCollectionCardDisplay extends Component {
                             </div>}
                             {this.state.edit===false &&
                             <div>
-                                <p>{this.props.game.hoursPlayed}</p>
+                                <p>You have {this.props.game.hoursPlayed} hours on record</p>
                                 <br/>
                             </div>}
                         {this.state.edit===true &&
@@ -103,7 +124,7 @@ export default class GameCollectionCardDisplay extends Component {
                     }
                         {this.state.edit===false &&
                         <div>
-                            <p>{this.props.game.review}</p>
+                            <p>Your review: {this.props.game.review}</p>
                             <br/>
                             <Button onClick={()=>this.setState({edit:true})}>Edit</Button>
                             <br />
