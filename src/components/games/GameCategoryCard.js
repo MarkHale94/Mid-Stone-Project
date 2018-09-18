@@ -5,7 +5,7 @@ export default class GameCategoryCard extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        gamesInCategory:null,
+        gamesInCategory:[],
         }
       }
 componentDidMount(){
@@ -21,10 +21,19 @@ componentDidMount(){
             <div>
                 <div><h3>Category:{this.props.category.categoryName}</h3></div>
                 <br />
+
+                {this.state.gamesInCategory.length === 0 &&
+                <div>
+                <h2>You Currently Have no Games in this Category</h2>
+                <br />
+                </div>
+                }
                 <Card.Group>
-                    {this.state.gamesInCategory !==null &&
-                   
-                        this.state.gamesInCategory.map(game => 
+                    {this.state.gamesInCategory.length >0 &&
+                    <div>
+                   <RandomGameModal game={this.state.gamesInCategory}/>
+                   <br />
+                        {this.state.gamesInCategory.map(game => 
                     <Card key={game.id}>
                         <Image src={(game.image)} alt={game.title}></Image>
                         <Card.Content>
@@ -34,10 +43,10 @@ componentDidMount(){
                         </Card.Description>
                         </Card.Content>
                     </Card>
-                    )
+                    )}
+                    </div>
                     }
                 </Card.Group>
-                <RandomGameModal game={this.state.gamesInCategory}/>
             </div>
         )
     }
