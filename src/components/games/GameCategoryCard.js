@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 import RandomGameModal from './RandomGameModal';
 import CategoryIndividualGameCards from './CategoryIndividualGameCards'
 export default class GameCategoryCard extends Component {
@@ -19,7 +19,7 @@ componentDidMount(){
     this.setState(newState)
 }
 
-updateGamesInCategory(){
+updateGamesInCategory=()=>{
     let newState={}
     newState.gamesInCategory=this.props.games.filter((game)=>{
         const filter =this.props.category.id;
@@ -28,11 +28,14 @@ updateGamesInCategory(){
     this.setState(newState)
 }
 
+deleteThisCategory=()=>{
+    this.props.delete("userCategories", this.props.category.id)
+}
 
     render(){
         return(
             <div>
-                <div><h3>Category:{this.props.category.categoryName}</h3></div>
+                <div><h3>Category:{this.props.category.categoryName}</h3> <Button onClick={this.deleteThisCategory}>Would You Like To Delete this Category?</Button></div>
                 <br />
 
                 {this.state.gamesInCategory.length === 0 &&

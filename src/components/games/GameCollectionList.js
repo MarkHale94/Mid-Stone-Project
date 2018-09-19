@@ -24,7 +24,7 @@ export default class GameCollectionList extends Component {
         const panes = this.props.categories.map((category) => ({
             menuItem: category.categoryName,
             render: () => <Tab.Pane>
-            <GameCategoryCard edit={this.props.editGame} games={this.props.game} category={category} key={category.id}/>
+            <GameCategoryCard renderTab={this.renderCategoryTabs} delete={this.props.deletecategory} edit={this.props.editGame} games={this.props.game} category={category} key={category.id}/>
         </Tab.Pane>
         }))
         return panes
@@ -46,7 +46,8 @@ export default class GameCollectionList extends Component {
                     }
                     { this.state.isInCategory===false &&
                     <div>
-                        <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>
+                        {this.props.categories.length!==0 &&
+                        <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>}
                         <CategoryMakerModal addNewCategory={this.props.addCategory} games={this.props.game}/>
                         <br />
                         <br />
