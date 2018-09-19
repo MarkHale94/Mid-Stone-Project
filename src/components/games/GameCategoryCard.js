@@ -9,6 +9,7 @@ constructor(props) {
         gamesInCategory:[]
         }
         this.updateGamesInCategory = this.updateGamesInCategory.bind(this);
+        this.removeGameFromCategory = this.removeGameFromCategory.bind(this);
       }
 componentDidMount(){
     let newState={}
@@ -27,8 +28,39 @@ updateGamesInCategory=()=>{
     })
     this.setState(newState)
 }
+removeGameFromCategory=(game)=>{
+    
+    let categoryToRemove = game.categoryId.filter((games)=>{
+        const filter =this.props.category.id;
+        return games===filter;
+    })
+    let indexValueofCategoryToRemove = game.categoryId.indexOf(categoryToRemove[0])
+    let newarray= game.categoryId
+    newarray.splice(indexValueofCategoryToRemove,1)
+    let newEdit={
+        giantBombGameid: game.giantBombGameid,
+        image: game.image,
+        title: game.title,
+        description: game.description,
+        genreName: game.genreName,
+        genreId: game.genreId,
+        platform: game.platform,
+        rating: game.rating,
+        similarGamesNames: game.similarGamesNames,
+        userId: game.userId,
+        hoursPlayed: game.hoursPlayed,
+        review: game.review,
+        categoryId: newarray
+    }
+    this.props.edit(("gameCollection", game.id),newEdit)
+
+}
 
 deleteThisCategory=()=>{
+    this.state.gamesInCategory.forEach(game => {
+        this.removeGameFromCategory(game)
+    })
+    this.updateGamesInCategory()
     this.props.delete("userCategories", this.props.category.id)
 }
 

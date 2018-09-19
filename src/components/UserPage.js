@@ -47,6 +47,11 @@ export default class UserPage extends Component {
     .then(games => {this.setState({gameCollection: games})})
   }
 
+  getUpdatedCategories=()=>{
+    let localUser = JSON.parse(sessionStorage.getItem("user"))
+    DataManager.getUserCategories("userCategories", localUser.id)
+    .then(categories => {this.setState({userCategories: categories})})}
+
   addNewGameCategory = (string, category)=>{
     let localUser = JSON.parse(sessionStorage.getItem("user"))
     DataManager.add(string, category)
@@ -84,7 +89,7 @@ export default class UserPage extends Component {
 
       </Tab.Pane> },
         { menuItem: 'Game Collection', render: () => <Tab.Pane>
-          <GameCollectionList  categories={this.state.userCategories} deletecategory={this.deleteGameFromCategory} addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
+          <GameCollectionList updateCategory={this.getUpdatedCategories} categories={this.state.userCategories} deletecategory={this.deleteGameFromCategory} addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
 
       ]
       return (

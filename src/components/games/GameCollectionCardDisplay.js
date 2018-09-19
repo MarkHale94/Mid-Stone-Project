@@ -30,6 +30,7 @@ export default class GameCollectionCardDisplay extends Component {
         }
     }
     deleteThisGame = ()=>{this.props.deleteGame("gameCollection", this.props.game.id)}
+
     
     saveTimeandReview = ()=>{
         let newEdit={
@@ -72,9 +73,6 @@ export default class GameCollectionCardDisplay extends Component {
             categoryId: newCategory
         }
         this.props.editGame(("gameCollection", this.props.game.id),newEdit)
-        if(this.state.edit===true){
-            this.setState({edit:false})
-        }
     }
 
     handleFieldChange = (evt) =>{

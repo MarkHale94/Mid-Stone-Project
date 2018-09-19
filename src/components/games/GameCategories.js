@@ -28,6 +28,7 @@ export default class CategoryMakerModal extends Component{
     userId:this.state.userId,
   }
   this.props.addNewCategory("userCategories", newCategory)
+  this.props.updateCategory()
   this.handleClose()
 }
 
