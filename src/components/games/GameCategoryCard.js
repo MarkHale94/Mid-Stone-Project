@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Image, Button} from 'semantic-ui-react';
-import RandomGameModal from './RandomGameModal'
+import { Card } from 'semantic-ui-react';
+import RandomGameModal from './RandomGameModal';
+import CategoryIndividualGameCards from './CategoryIndividualGameCards'
 export default class GameCategoryCard extends Component {
 constructor(props) {
     super(props);
@@ -16,6 +17,8 @@ componentDidMount(){
     })
     this.setState(newState)
 }
+
+
     render(){
         return(
             <div>
@@ -34,16 +37,7 @@ componentDidMount(){
                    <RandomGameModal game={this.state.gamesInCategory}/>
                    <br />
                         {this.state.gamesInCategory.map(game => 
-                    <Card key={game.id}>
-                        <Image src={(game.image)} alt={game.title}></Image>
-                        <Card.Content>
-                        <Card.Header>{game.title}</Card.Header>
-                        <Card.Description>
-                            game description: {game.description}
-                        </Card.Description>
-                        <Button>Remove This Game From This Category</Button>
-                        </Card.Content>
-                    </Card>
+                        <CategoryIndividualGameCards edit={this.props.edit}category={this.props.category} game={game} key={game.id} />
                     )}
                     </div>
                     }

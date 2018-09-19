@@ -24,7 +24,7 @@ export default class GameCollectionList extends Component {
         const panes = this.props.categories.map((category) => ({
             menuItem: category.categoryName,
             render: () => <Tab.Pane>
-            <GameCategoryCard games={this.props.game} category={category} key={category.id}/>
+            <GameCategoryCard edit={this.props.editGame} games={this.props.game} category={category} key={category.id}/>
         </Tab.Pane>
         }))
         return panes
