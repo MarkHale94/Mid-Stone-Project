@@ -43,6 +43,7 @@ export default class SpecificGameModal extends Component{
       userId: this.state.userId,
       hoursPlayed: null,
       review: null,
+      categoryId: this.state.categoryId
     }
     this.props.addGame("gameCollection", newGameToAdd)
     this.handleClose()

@@ -26,7 +26,6 @@ export default class CategoryMakerModal extends Component{
   let newCategory={
     categoryName:this.state.categoryName,
     userId:this.state.userId,
-    gameId:this.state.gameId
   }
   this.props.addNewCategory("userCategories", newCategory)
   this.handleClose()

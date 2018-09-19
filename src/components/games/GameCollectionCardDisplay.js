@@ -53,9 +53,41 @@ export default class GameCollectionCardDisplay extends Component {
         }
     }
 
+    saveCategorySelection = ()=>{
+        let newCategory=this.props.game.categoryId
+        newCategory.push(this.state.categoryToAddTo)
+        let newEdit={
+            giantBombGameid: this.props.game.giantBombGameid,
+            image: this.props.game.image,
+            title: this.props.game.title,
+            description: this.props.game.description,
+            genreName: this.props.game.genreName,
+            genreId: this.props.game.genreId,
+            platform: this.props.game.platform,
+            rating: this.props.game.rating,
+            similarGamesNames: this.props.game.similarGamesNames,
+            userId: this.props.game.userId,
+            hoursPlayed: this.state.hoursPlayed,
+            review: this.state.review,
+            categoryId: newCategory
+        }
+        this.props.editGame(("gameCollection", this.props.game.id),newEdit)
+        if(this.state.edit===true){
+            this.setState({edit:false})
+        }
+    }
+
     handleFieldChange = (evt) =>{
         const stateToChange = {}
         stateToChange[evt.target.id] = evt.target.value
+        this.setState(stateToChange)
+    }
+
+    handleSelectionChange = (evt) =>{
+        const stateToChange = {}
+        let indexvalue = evt.target.selectedIndex
+        let realId = evt.target[indexvalue].id
+        stateToChange[evt.target.id] = parseInt(realId,10)
         this.setState(stateToChange)
     }
 
@@ -74,7 +106,7 @@ export default class GameCollectionCardDisplay extends Component {
                 {this.state.categoriesExist.length>0 &&
                 
                 <select defaultValue="" name="category" id="categoryToAddTo"
-                onChange={this.handleFieldChange}>
+                onChange={this.handleSelectionChange}>
             <option value="">Select A Category to Add this Game to</option>
         {
             this.state.categoriesExist.map(e => <option key={e.id} id={e.id}>{e.categoryName}</option>)
@@ -83,7 +115,7 @@ export default class GameCollectionCardDisplay extends Component {
                 }
                 { this.state.categoryToAddTo !==null &&
                     <div>
-                        <Button>Submit To Selected Category</Button>
+                        <Button onClick={this.saveCategorySelection}>Submit To Selected Category</Button>
                         <br />
                     </div>
                 }
