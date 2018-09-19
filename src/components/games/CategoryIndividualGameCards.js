@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Card, Image, Button} from 'semantic-ui-react'
 
 export default class CategoryIndividualGameCards extends Component {
+
+
     removeGameFromCategory=()=>{
         let categoryToRemove = this.props.game.categoryId.filter((game)=>{
         const filter =this.props.category.id;
@@ -10,7 +12,6 @@ export default class CategoryIndividualGameCards extends Component {
     let indexValueofCategoryToRemove = this.props.game.categoryId.indexOf(categoryToRemove[0])
     let newarray=this.props.game.categoryId
     newarray.splice(indexValueofCategoryToRemove,1)
-    console.log(newarray)
     let newEdit={
         giantBombGameid: this.props.game.giantBombGameid,
         image: this.props.game.image,
@@ -27,7 +28,9 @@ export default class CategoryIndividualGameCards extends Component {
         categoryId: newarray
     }
     this.props.edit(("gameCollection", this.props.game.id),newEdit)
-    }
+    this.props.pleasework()
+}
+
     render(){
         return(
             <Card>

@@ -6,10 +6,20 @@ export default class GameCategoryCard extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        gamesInCategory:[],
+        gamesInCategory:[]
         }
+        this.updateGamesInCategory = this.updateGamesInCategory.bind(this);
       }
 componentDidMount(){
+    let newState={}
+    newState.gamesInCategory=this.props.games.filter((game)=>{
+        const filter =this.props.category.id;
+        return game.categoryId.includes(filter);
+    })
+    this.setState(newState)
+}
+
+updateGamesInCategory(){
     let newState={}
     newState.gamesInCategory=this.props.games.filter((game)=>{
         const filter =this.props.category.id;
@@ -31,17 +41,18 @@ componentDidMount(){
                 <br />
                 </div>
                 }
-                <Card.Group>
                     {this.state.gamesInCategory.length >0 &&
-                    <div>
+                   <div>
                    <RandomGameModal game={this.state.gamesInCategory}/>
                    <br />
+                    <Card.Group>
                         {this.state.gamesInCategory.map(game => 
-                        <CategoryIndividualGameCards edit={this.props.edit}category={this.props.category} game={game} key={game.id} />
+                        <CategoryIndividualGameCards pleasework={this.updateGamesInCategory} gamesinCategory={this.state.gamesInCategory} edit={this.props.edit}category={this.props.category} game={game} key={game.id} />
                     )}
+                </Card.Group>
                     </div>
                     }
-                </Card.Group>
+
             </div>
         )
     }
