@@ -8,7 +8,8 @@ export default class GameCollectionList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        isInCategory: false
+        isInCategory: false,
+        similarGames:null
         }
       }
     
@@ -29,6 +30,23 @@ export default class GameCollectionList extends Component {
         }))
         return panes
 }
+    findSimilarGame=()=>{
+        let totalSimilarGames=[]
+        for(let i=0; i<this.props.game.length;i++){
+                if(this.props.game[i].similarGamesNames.includes("No Similar Games Available")){
+                    console.log("skip this one")
+                }else{
+            totalSimilarGames.push(this.props.game[i].similarGamesNames.split(', '))
+            }
+        }
+        let randomNumber = Math.floor(Math.random()*totalSimilarGames.length)
+
+        let randomNumber2 = Math.floor(Math.random()*totalSimilarGames[randomNumber].length)
+
+        let randomSimilarGame = totalSimilarGames[randomNumber][randomNumber2] 
+        console.log(randomSimilarGame)
+    }
+
     render(){
         return (
             <div>
@@ -46,6 +64,7 @@ export default class GameCollectionList extends Component {
                     }
                     { this.state.isInCategory===false &&
                     <div>
+                        <Button onClick={this.findSimilarGame}>Find Me a Similar Game</Button>
                         {this.props.categories.length!==0 &&
                         <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>}
                         <CategoryMakerModal  updateCategory={this.props.updateCategory} addNewCategory={this.props.addCategory} games={this.props.game}/>
