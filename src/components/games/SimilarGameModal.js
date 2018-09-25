@@ -23,10 +23,12 @@ export default class SimilarGameModal extends Component{
       categoryId:[]
     }
     this.addNewGame = this.addNewGame.bind(this);
+    this.searchForSpecificGame = this.searchForSpecificGame.bind(this);
   }
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
+
 
   addNewGame(evt){
     evt.preventDefault()
@@ -48,9 +50,26 @@ export default class SimilarGameModal extends Component{
     this.props.addGame("gameCollection", newGameToAdd)
     this.handleClose()
   }
+  findSimilarGame=()=>{
+    let totalSimilarGames=[]
+    for(let i=0; i<this.props.game.length;i++){
+            if(this.props.game[i].similarGamesNames.includes("No Similar Games Available")){
+                console.log("skip this one")
+            }else{
+        totalSimilarGames.push(this.props.game[i].similarGamesNames.split(', '))
+        }
+    }
+    let randomNumber = Math.floor(Math.random()*totalSimilarGames.length)
 
+    let randomNumber2 = Math.floor(Math.random()*totalSimilarGames[randomNumber].length)
+
+    let randomSimilarGame = totalSimilarGames[randomNumber][randomNumber2] 
+    console.log(randomSimilarGame)
+    return randomSimilarGame
+}
 searchForSpecificGame = ()=>{
-DataManager.search(this.props.randomSimilarGame())
+console.log(this.props)
+DataManager.search(this.findSimilarGame())
 .then((game)=>{ return DataManager.specificGameSearch(game.results[0].api_detail_url)})
 .then((game) => {
     let newState={}

@@ -26,28 +26,11 @@ export default class GameCollectionList extends Component {
         const panes = this.props.categories.map((category) => ({
             menuItem: category.categoryName,
             render: () => <Tab.Pane>
-            <GameCategoryCard updateCategory={this.props.updateCategory} renderTab={this.renderCategoryTabs} delete={this.props.deletecategory} edit={this.props.editGame} games={this.props.game} category={category} key={category.id}/>
+            <GameCategoryCard updateCategory={this.props.updateCategory} renderTab={this.renderCategoryTabs} delete={this.props.deletecategory} edit={this.props.editGame} games={this.props.game} category={category} addGame={this.props.addGame} game={this.props.game} key={category.id}/>
         </Tab.Pane>
         }))
         return panes
 }
-    findSimilarGame=()=>{
-        let totalSimilarGames=[]
-        for(let i=0; i<this.props.game.length;i++){
-                if(this.props.game[i].similarGamesNames.includes("No Similar Games Available")){
-                    console.log("skip this one")
-                }else{
-            totalSimilarGames.push(this.props.game[i].similarGamesNames.split(', '))
-            }
-        }
-        let randomNumber = Math.floor(Math.random()*totalSimilarGames.length)
-
-        let randomNumber2 = Math.floor(Math.random()*totalSimilarGames[randomNumber].length)
-
-        let randomSimilarGame = totalSimilarGames[randomNumber][randomNumber2] 
-        console.log(randomSimilarGame)
-        return randomSimilarGame
-    }
 
     render(){
         return (
@@ -66,7 +49,7 @@ export default class GameCollectionList extends Component {
                     }
                     { this.state.isInCategory===false &&
                     <div>
-                        <SimilarGameModal addGame={this.props.addGame} randomSimilarGame={this.findSimilarGame} game={this.props.game}/>
+                        <SimilarGameModal addGame={this.props.addGame} game={this.props.game}/>
                         {this.props.categories.length!==0 &&
                         <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>}
                         <CategoryMakerModal  updateCategory={this.props.updateCategory} addNewCategory={this.props.addCategory} games={this.props.game}/>

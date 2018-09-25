@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button } from 'semantic-ui-react';
 import RandomGameModal from './RandomGameModal';
 import CategoryIndividualGameCards from './CategoryIndividualGameCards'
+import SimilarGameModal from './SimilarGameModal'
 export default class GameCategoryCard extends Component {
 constructor(props) {
     super(props);
@@ -79,6 +80,7 @@ deleteThisCategory=()=>{
                     {this.state.gamesInCategory.length >0 &&
                    <div>
                    <RandomGameModal game={this.state.gamesInCategory}/>
+                   <SimilarGameModal addGame={this.props.addGame} randomSimilarGame={this.props.randomSimilarGame} game={this.state.gamesInCategory}/>
                    <br />
                     <Card.Group>
                         {this.state.gamesInCategory.map(game => 
