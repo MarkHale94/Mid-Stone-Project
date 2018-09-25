@@ -4,6 +4,7 @@ import { Card, Tab, Button } from 'semantic-ui-react'
 import RandomGameModal from './RandomGameModal'
 import CategoryMakerModal from './GameCategories'
 import GameCategoryCard from './GameCategoryCard'
+import SimilarGameModal from './SimilarGameModal'
 export default class GameCollectionList extends Component {   
     constructor(props) {
         super(props);
@@ -45,6 +46,7 @@ export default class GameCollectionList extends Component {
 
         let randomSimilarGame = totalSimilarGames[randomNumber][randomNumber2] 
         console.log(randomSimilarGame)
+        return randomSimilarGame
     }
 
     render(){
@@ -64,7 +66,7 @@ export default class GameCollectionList extends Component {
                     }
                     { this.state.isInCategory===false &&
                     <div>
-                        <Button onClick={this.findSimilarGame}>Find Me a Similar Game</Button>
+                        <SimilarGameModal addGame={this.props.addGame} randomSimilarGame={this.findSimilarGame} game={this.props.game}/>
                         {this.props.categories.length!==0 &&
                         <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>}
                         <CategoryMakerModal  updateCategory={this.props.updateCategory} addNewCategory={this.props.addCategory} games={this.props.game}/>

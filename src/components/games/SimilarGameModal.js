@@ -3,7 +3,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react';
 import React, { Component } from 'react';
 import DataManager from '../modules/DataManager'
 
-export default class SpecificGameModal extends Component{
+export default class SimilarGameModal extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -50,8 +50,9 @@ export default class SpecificGameModal extends Component{
   }
 
 searchForSpecificGame = ()=>{
-DataManager.specificGameSearch(this.props.game.api_detail_url)
-  .then((game) => {
+DataManager.search(this.props.randomSimilarGame())
+.then((game)=>{ return DataManager.specificGameSearch(game.results[0].api_detail_url)})
+.then((game) => {
     let newState={}
     newState.giantBombGameid=game.results.id
     newState.image=game.results.image.medium_url

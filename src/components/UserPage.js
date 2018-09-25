@@ -89,7 +89,7 @@ export default class UserPage extends Component {
 
       </Tab.Pane> },
         { menuItem: 'Game Collection', render: () => <Tab.Pane>
-          <GameCollectionList updateCategory={this.getUpdatedCategories} categories={this.state.userCategories} deletecategory={this.deleteGameFromCategory} addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
+          <GameCollectionList addGame={this.addNewGameToCollection} updateCategory={this.getUpdatedCategories} categories={this.state.userCategories} deletecategory={this.deleteGameFromCategory} addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
 
       ]
       return (
