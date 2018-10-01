@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DataManager from '../modules/DataManager'
 
 export default class Login extends Component {
+  //for handling the field change when a user wants to login/register
   state = {
     username: "",
     email: "",
@@ -10,11 +11,13 @@ export default class Login extends Component {
 
 
 registerUser= () =>{
+  //this checks to see if a user with the same username, email, and password already exists. If this user already exists, then it will log them in instead of just registering a new account.
   let newUser = {
     username:this.state.username,
     email:this.state.email,
     password:this.state.password
   }
+  //if all of the user's info in state matches what the user put into the fields, then it uses that information to log in the user and brings up all of their data.
   DataManager.getAllUsers().then((users)=>{
     let loginUser = users.find(user => user.username === this.state.username && user.email === this.state.email && user.password===this.state.password)
     if(loginUser){
@@ -27,7 +30,7 @@ registerUser= () =>{
       sessionStorage.setItem("user", JSON.stringify(existingUser))
       window.location.reload()
     }else{
-
+//if all of the info does not match completely with what is in state, then they will automatically be registered with a new account.
       DataManager.add("users", newUser)
       .then((userinfo)=>sessionStorage.setItem("user", JSON.stringify(userinfo)))
       .then(()=>window.location.reload())
