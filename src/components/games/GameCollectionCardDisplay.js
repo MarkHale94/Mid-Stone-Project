@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Image, Button, Checkbox } from 'semantic-ui-react'
+import './GameCollectionCardDisplay.css'
 export default class GameCollectionCardDisplay extends Component {
 
     //This component contains state that has edit and isChecked as true or false, hours played and review as null, categoryToAddTo as null, and categoriesExist as an empty array
@@ -105,7 +106,7 @@ export default class GameCollectionCardDisplay extends Component {
         return(
             <Card>
                 {/*This return section creates the individual game cards that will be displayed to the user*/}
-                <Image src={(this.props.game.image)} alt={this.props.game.title}></Image>
+                <Image className="cardImageToResize" src={(this.props.game.image)} alt={this.props.game.title}></Image>
                 <Card.Content>
                 <Card.Header>{this.props.game.title}</Card.Header>
                 <Card.Description>

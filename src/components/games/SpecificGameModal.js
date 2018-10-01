@@ -2,7 +2,7 @@
 import { Button, Header, Image, Modal } from 'semantic-ui-react';
 import React, { Component } from 'react';
 import DataManager from '../modules/DataManager'
-
+import './SpecificGameModal.css'
 export default class SpecificGameModal extends Component{
   //This component has state that contains modalOpen set to false and specific game information all set to null with the exceptions of the userId and the categoryId, which are gotten from session storage and is an empty array respectively. The add new game function is put inside of the constructor because it needs to the use the component level "this" and not just the function scope "this". By binding the component level this to the function, it allows us to use props, state, and other functions inside of the function that we bind.
   constructor(props) {
@@ -120,8 +120,7 @@ export default class SpecificGameModal extends Component{
         onClose={this.handleClose}>
       <Modal.Content image>
         <Image
-          wrapped
-          size="medium"
+          className="cardImageToResize"
           src={(this.state.image)}
         />
         <Modal.Description>

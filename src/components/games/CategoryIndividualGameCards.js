@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Image, Button} from 'semantic-ui-react'
+import './CategoryIndividualGameCards.css'
 
 export default class CategoryIndividualGameCards extends Component {
     //this is a function that will remove a game from a category. To do this it first figures out which category the game belongs to needs to get removed. It does this looking at the game and filtering the game's categories and matching it to the category id number of the specific category that we are looking at.
@@ -36,7 +37,7 @@ export default class CategoryIndividualGameCards extends Component {
     render(){
         return(
             <Card>
-                <Image src={(this.props.game.image)} alt={this.props.game.title}></Image>
+                <Image className="cardImageToResize" src={(this.props.game.image)} alt={this.props.game.title}></Image>
                 <Card.Content>
                     <Card.Header>{this.props.game.title}</Card.Header>
                     <Card.Description>

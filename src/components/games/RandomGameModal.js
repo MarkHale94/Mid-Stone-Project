@@ -1,7 +1,7 @@
 
 import { Button, Header, Image, Modal} from 'semantic-ui-react';
 import React, { Component } from 'react';
-
+import './RandomGameModal.css'
 export default class RandomGameModal extends Component{
   //This component has state that comprises of modalOpen set to false and game specific information that is set to null.
   constructor(props) {
@@ -47,8 +47,7 @@ export default class RandomGameModal extends Component{
     onClose={this.handleClose}>
       <Modal.Content image>
         <Image
-          wrapped
-          size="medium"
+          className="cardImageToResize"
           src={(this.state.image)}
         />
         <Modal.Description>
