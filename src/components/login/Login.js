@@ -39,12 +39,13 @@ registerUser= () =>{
   
 }
 
-
+//changes current state to what the user puts into the input fields
 handleFieldChange = (evt) => {
   const stateToChange = {}
   stateToChange[evt.target.id] = evt.target.value
   this.setState(stateToChange)
 }
+//login area where the user will input their username, email, and password
     render() {
       return (
         <div className="login-area">

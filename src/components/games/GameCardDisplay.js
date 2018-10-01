@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Image,} from 'semantic-ui-react'
 import SpecificGameModal from './SpecificGameModal'
 export default class GameCardDisplay extends Component {
+    //this component makes the game cards using the information passed down as props for the individual games.
     render(){
         return(
             <Card>
