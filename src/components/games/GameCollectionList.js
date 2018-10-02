@@ -51,7 +51,7 @@ export default class GameCollectionList extends Component {
                     {/*This internal conditional checks to see if the current state of isInCategory is set to true or false. If the value is equal to true, then the component will render a button that will show the user's game collection.*/}
                     {this.state.isInCategory===true &&
                         <div>
-                        <Button onClick={this.renderCategoryTabs}>Show Collection</Button>
+                        <Button color="youtube" onClick={this.renderCategoryTabs}>Show Collection</Button>
                         <Tab panes={this.categoryTabMaker()}/>
                         </div>
                     }
@@ -61,7 +61,7 @@ export default class GameCollectionList extends Component {
                     <div>
                         <SimilarGameModal addGame={this.props.addGame} game={this.props.game}/>
                         {this.props.categories.length!==0 &&
-                        <Button onClick={this.renderCategoryTabs}>Show Catergories</Button>}
+                        <Button color="youtube" onClick={this.renderCategoryTabs}>Show Catergories</Button>}
                         <CategoryMakerModal  updateCategory={this.props.updateCategory} addNewCategory={this.props.addCategory} games={this.props.game}/>
                         <br />
                         <br />

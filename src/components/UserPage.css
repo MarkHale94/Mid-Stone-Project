@@ -1,0 +1,12 @@
+.welcomeTitle {
+    text-align: center;
+}
+.userPageDefaultBackgroundColor{
+    background-color: bisque;
+}
+.tabColor {
+    background-color:bisque;
+}
+.ui.tab.active{
+    background-color: white;
+}

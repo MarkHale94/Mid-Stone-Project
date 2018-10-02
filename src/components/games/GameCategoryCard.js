@@ -76,7 +76,8 @@ deleteThisCategory=()=>{
     render(){
         return(
             <div>
-                <div><h3>Category:{this.props.category.categoryName}</h3> <Button onClick={this.deleteThisCategory}>Would You Like To Delete this Category?</Button></div>
+                <div><h3>Category: {this.props.category.categoryName}</h3> <Button color="youtube" onClick={this.deleteThisCategory}>Would You Like To Delete this Category?</Button></div>
+                <br />
                 <br />
                 {this.state.gamesInCategory.length === 0 &&
                 <div>
@@ -86,8 +87,11 @@ deleteThisCategory=()=>{
                 }
                 {this.state.gamesInCategory.length >0 &&
                     <div>
-                        <RandomGameModal game={this.state.gamesInCategory}/>
                         <SimilarGameModal addGame={this.props.addGame} randomSimilarGame={this.props.randomSimilarGame} game={this.state.gamesInCategory}/>
+                        <br />
+                        <br />
+                        <RandomGameModal game={this.state.gamesInCategory}/>
+                        <br />
                         <br />
                         <Card.Group>
                             {this.state.gamesInCategory.map(game => 

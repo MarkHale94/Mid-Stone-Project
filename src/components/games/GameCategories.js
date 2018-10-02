@@ -40,7 +40,7 @@ export default class CategoryMakerModal extends Component{
 render(){
     return(
       //this sets the modal to open on the button click. The modal content actually begins at the Modal.Content section.
-      <Modal trigger={<Button color="youtube" size="large" onClick={this.handleOpen}>Would You Like to Create a Custom Category For Your Games?</Button>}
+      <Modal trigger={<Button color="youtube" onClick={this.handleOpen}>Would You Like to Create a Custom Category For Your Games?</Button>}
       open={this.state.modalOpen}
       onClose={this.handleClose}>
         <Modal.Content>

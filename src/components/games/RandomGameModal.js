@@ -65,7 +65,7 @@ export default class RandomGameModal extends Component{
             Platform(s):{this.state.platform}
           </p>
           <Modal.Actions>
-            <Button onClick={this.randomGameButton}>Choose A different Game?</Button>
+            <Button color="youtube" onClick={this.randomGameButton}>Choose A different Game?</Button>
           </Modal.Actions>
         </Modal.Description>
       </Modal.Content>

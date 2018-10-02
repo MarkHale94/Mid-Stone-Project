@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DataManager from '../modules/DataManager'
+import { Button } from 'semantic-ui-react'
+import "./Login.css"
 
 export default class Login extends Component {
   //for handling the field change when a user wants to login/register
@@ -48,14 +50,16 @@ handleFieldChange = (evt) => {
 //login area where the user will input their username, email, and password
     render() {
       return (
-        <div className="login-area">
-          <h2>Login/Register</h2>
-          <div className="username-input"><input type="text" placeholder="Create a Username" id="username" defaultValue={this.state.username} onChange={this.handleFieldChange} /></div>
-          <div className="email-input"><input type="text" placeholder="Add your Email Address" id="email" defaultValue={this.state.email} onChange={this.handleFieldChange} /></div>
-        
-          <div className="password-input"><input type="text" placeholder="Create a Password" id="password" defaultValue={this.state.password} onChange={this.handleFieldChange} /></div>
-          <button onClick={this.registerUser}>Login/Register</button>
+        <div>
+          <div className="login-area">
+            <h2>Login/Register</h2>
+            <div className="username-input"><input type="text" placeholder="Create a Username" id="username" defaultValue={this.state.username} onChange={this.handleFieldChange} /></div>
+            <div className="email-input"><input type="text" placeholder="Add your Email Address" id="email" defaultValue={this.state.email} onChange={this.handleFieldChange} /></div>
+          
+            <div className="password-input"><input type="text" placeholder="Create a Password" id="password" defaultValue={this.state.password} onChange={this.handleFieldChange} /></div>
+            <Button color="youtube" onClick={this.registerUser}>Login/Register</Button>
+          </div>
         </div>
-      );
+      )
     }
   }

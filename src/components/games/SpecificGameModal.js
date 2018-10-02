@@ -115,7 +115,7 @@ export default class SpecificGameModal extends Component{
   //This render function creates the insides of the modal using the information that is available in state after the specific data call. At the bottom of the modal is a button that allows the user to add the game to their collection.
   render(){
       return(
-        <Modal trigger={<Button onClick={this.searchForSpecificGame}>Let's Do This Shit</Button>}
+        <Modal trigger={<Button color="youtube" onClick={this.searchForSpecificGame}>View This Game</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}>
       <Modal.Content image>
@@ -138,7 +138,7 @@ export default class SpecificGameModal extends Component{
             Platform(s):{this.state.platform}
           </p>
           <Modal.Actions>
-            <Button onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
+            <Button color="youtube" onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
           </Modal.Actions>
         </Modal.Description>
       </Modal.Content>

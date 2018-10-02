@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import DataManager from './modules/DataManager'
 import GameCardDisplay from './games/GameCardDisplay'
-import { Card, Tab } from 'semantic-ui-react'
+import { Card, Tab, Button } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import GameCollectionList from './games/GameCollectionList';
+import "./UserPage.css"
 
 export default class UserPage extends Component {
   //main state for the program here
@@ -97,18 +98,21 @@ export default class UserPage extends Component {
           <Tab.Pane>
             <div className="search-input">
               <input type="text" placeholder="Search" id="userSearch" defaultValue={this.state.userSearch} onChange={this.handleFieldChange}/>
-              <button onClick={this.searchForGames}>Search</button>
+              <Button color="youtube" size={"mini"} onClick={this.searchForGames}>Search</Button>
               <Card.Group>
                 {this.state.gamesListSearch.map(game =>
                   <GameCardDisplay addGame={this.addNewGameToCollection} game={game} key={game.id}/>)}
               </Card.Group>
+              <br/>
+              <br/>
               <br/>
             </div>
           </Tab.Pane>
         },
 
         //This is the second pane that loads by default for the user. This pane is title Game Collection because it holds all of the games that the user has in their collection and displays them. It takes all of the information from the gameCollection array and sends it down to the GameCollectionList file, which then builds up all of the cards for the collection as well as some other features, including the categories, similar game finding logic, and the random game picking logic.
-        { menuItem: 'Game Collection', render: () => <Tab.Pane>
+        { menuItem: 'Game Collection', render: () =>
+          <Tab.Pane>
           <GameCollectionList addGame={this.addNewGameToCollection} updateCategory={this.getUpdatedCategories} categories={this.state.userCategories} deletecategory={this.deleteGameFromCategory} addCategory={this.addNewGameCategory} editGame={this.editGameInfo} deleteGame={this.deleteGameFromCollection} game={this.state.gameCollection}/></Tab.Pane> },
 
       ]
@@ -116,13 +120,10 @@ export default class UserPage extends Component {
 
       //this is our main information being rendered and is no longer part of the panes for the Tab component. The first section showcases user information and the second calls the Tab component, which takes the pane information we provided above and uses that to create the panes that the user sees when they log in.
       return (
-        <div>
-          <div>Hi There {JSON.parse(sessionStorage.getItem("user")).username}</div>
-          <div>Your email is {JSON.parse(sessionStorage.getItem("user")).email}</div>
-          <div>Your passowrd is {JSON.parse(sessionStorage.getItem("user")).password}</div>
-          <div>Your ID number is {JSON.parse(sessionStorage.getItem("user")).id}</div>
+        <div className="userPageDefaultBackgroundColor">
+          <h1 className="welcomeTitle">Welcome to What2Play, {JSON.parse(sessionStorage.getItem("user")).username}!</h1>
           <div>
-          <Tab panes={panes}/>
+          <Tab className="tabColor"panes={panes}/>
         </div>
       </div>
       );

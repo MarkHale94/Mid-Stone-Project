@@ -135,7 +135,7 @@ export default class SimilarGameModal extends Component{
   //The render function contains the meat of the modal and uses the information in state to fill itself out. At the bottom of the modal, it contains a button that allows the user to take the new random game and add it to their collection.
   render(){
       return(
-        <Modal trigger={<Button onClick={this.searchForSpecificGame}>Recommend a Game</Button>}
+        <Modal trigger={<Button color="youtube" onClick={this.searchForSpecificGame}>Recommend a Game</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}>
       <Modal.Content image>
@@ -158,7 +158,7 @@ export default class SimilarGameModal extends Component{
             Platform(s):{this.state.platform}
           </p>
           <Modal.Actions>
-            <Button onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
+            <Button color="youtube" onClick={this.addNewGame}>Add {this.state.title} to Your Collection?</Button>
           </Modal.Actions>
         </Modal.Description>
       </Modal.Content>
