@@ -1,4 +1,4 @@
-const remoteURL = "http://localhost:8088"
+const remoteURL = "https://front-end-capstone-server.herokuapp.com/"
 
 export default Object.create(null, {
     //goes to the json server and adds an object using the key provided
