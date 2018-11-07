@@ -74,7 +74,14 @@ export default Object.create(null, {
     //goes to the giantbomb api using my api key and does a more specific search for the game details that aren't provided in the more generic search. This uses the specific game url provided from the broader search done above.
     specificGameSearch: {
         value: (gameSpecificURL) => {
-            return fetch(`${gameSpecificURL}?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200`)
+            return fetch(`${gameSpecificURL}?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200`,
+            {
+                method: "GET",
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
                 .then(result => result.json())
         }
     }
