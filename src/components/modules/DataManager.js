@@ -59,12 +59,12 @@ export default Object.create(null, {
     //goes to the giantbomb api using my api key to do a search for a game using the search criteria provided by the user from the search bar
     search: {
         value: (searchTerm) => {
-            return fetch(`https://www.giantbomb.com/api/search/?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200&query="${searchTerm}"&resources=game`,
+            return fetch(`https://cors-anywhere.herokuapp.com/https://giantbomb.com/api/search/?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200&query="${searchTerm}"&resources=game`,
                 {
                     method: "GET",
-                    credentials: 'include',
+                    mode:"cors",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/jsonp; charset=utf-8",
                     }
                 }
             )
@@ -74,14 +74,7 @@ export default Object.create(null, {
     //goes to the giantbomb api using my api key and does a more specific search for the game details that aren't provided in the more generic search. This uses the specific game url provided from the broader search done above.
     specificGameSearch: {
         value: (gameSpecificURL) => {
-            return fetch(`${gameSpecificURL}?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200`,
-            {
-                method: "GET",
-                credentials: 'include',
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+            return fetch(`https://cors-anywhere.herokuapp.com/${gameSpecificURL}?api_key=3d002b8b6d1455fbeca66da0e5ce03a9450cb19b&format=json&limit=200`)
                 .then(result => result.json())
         }
     }
