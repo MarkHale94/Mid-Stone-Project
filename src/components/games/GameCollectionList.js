@@ -10,8 +10,7 @@ export default class GameCollectionList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        isInCategory: false,
-        similarGames:null
+        isInCategory: false
         }
       }
     
