@@ -75,9 +75,7 @@ export default class SimilarGameModal extends Component {
   findSimilarGame = () => {
     let totalSimilarGames = []
     for (let i = 0; i < this.props.game.length; i++) {
-      if (this.props.game[i].similarGamesNames.includes("No Similar Games Available")) {
-        console.log("skip this game")
-      } else {
+      if (!this.props.game[i].similarGamesNames.includes("No Similar Games Available")) {
         totalSimilarGames.push(this.props.game[i].similarGamesNames.split(', '))
       }
     }
